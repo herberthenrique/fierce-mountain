@@ -1,6 +1,7 @@
+/* global describe, it, before, after */
 'use strict';
 
-require('../../mocha.conf.js')
+require('../../mocha.conf.js');
 
 import app from '../..';
 import User from './user.model';
@@ -40,6 +41,9 @@ describe('User API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
+          if (err) {
+            throw err;
+          }
           token = res.body.token;
           done();
         });
@@ -48,10 +52,13 @@ describe('User API:', function() {
     it('should respond with a user profile when authenticated', function(done) {
       request(app)
         .get('/api/user/me')
-        .set('authorization', 'Bearer ' + token)
+        .set('authorization', `Bearer ${token}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
+          if (err) {
+            throw err;
+          }
           res.body._id.toString().should.equal(user._id.toString());
           done();
         });

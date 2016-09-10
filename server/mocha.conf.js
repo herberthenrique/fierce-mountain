@@ -2,7 +2,8 @@
 
 // Register the Babel require hook
 require('babel-core/register');
-process.env.NODE_ENV = 'test';
+
+process.env.NODE_ENV = 'test'; // eslint-disable-line no-process-env
 
 var chai = require('chai');
 // Load Chai assertions
@@ -16,4 +17,4 @@ global.sinon = require('sinon');
 // Initialize Chai plugins
 chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
-chai.use(require('chai-things'))
+chai.use(require('chai-things'));

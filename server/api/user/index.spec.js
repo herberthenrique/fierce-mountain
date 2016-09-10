@@ -1,6 +1,8 @@
+/* global sinon, describe, it */
+
 'use strict';
 
-require('../../mocha.conf.js')
+require('../../mocha.conf.js');
 
 var proxyquire = require('proxyquire').noPreserveCache();
 
@@ -18,7 +20,7 @@ var authServiceStub = {
     return 'authService.isAuthenticated';
   },
   hasRole(role) {
-    return 'authService.hasRole.' + role;
+    return `authService.hasRole.${role}`;
   }
 };
 
@@ -31,7 +33,7 @@ var routerStub = {
 
 // require the index with our stubbed out modules
 var userIndex = proxyquire('./index', {
-  'express': {
+  express: {
     Router() {
       return routerStub;
     }

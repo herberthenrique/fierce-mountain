@@ -1,8 +1,8 @@
+/* global beforeEach, afterEach, describe, it, before */
 'use strict';
 
-require('../../mocha.conf.js')
+require('../../mocha.conf.js');
 
-import app from '../..';
 import User from './user.model';
 var user;
 var genUser = function() {

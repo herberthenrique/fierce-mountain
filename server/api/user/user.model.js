@@ -2,7 +2,7 @@
 /*eslint no-invalid-this:0*/
 import crypto from 'crypto';
 import mongoose, { Schema } from 'mongoose';
-import PhoneSchema from '../phone/phone.model.js'
+import PhoneSchema from '../phone/phone.model.js';
 mongoose.Promise = require('bluebird');
 
 
@@ -162,6 +162,7 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
+  /* eslint-disable prefer-rest-params */
   makeSalt(byteSize, callback) {
     var defaultByteSize = 16;
 
@@ -209,7 +210,7 @@ UserSchema.methods = {
     var salt = new Buffer(this.salt, 'base64');
 
     if (!callback) {
-      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
+      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)  // eslint-disable-line no-sync
         .toString('base64');
     }
 

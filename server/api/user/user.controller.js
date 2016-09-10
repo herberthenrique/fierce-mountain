@@ -3,7 +3,7 @@
 import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
-import _ from 'lodash'
+import _ from 'lodash';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -43,9 +43,9 @@ export function create(req, res) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 30
       });
-      let userObject = _.omit(user.toJSON(), ['salt', 'provider', 'password'])
+      let userObject = _.omit(user.toJSON(), ['salt', 'provider', 'password']);
       console.log('userObject', userObject);
-      res.json({ token: token, user: userObject });
+      res.json({ token, user: userObject });
     })
     .catch(validationError(res));
 }
@@ -58,7 +58,7 @@ export function show(req, res, next) {
 
   return User.findById(userId).exec()
     .then(user => {
-      if(!user) {
+      if (!user) {
         return res.status(404).end();
       }
       res.json(user.profile);
@@ -88,7 +88,7 @@ export function changePassword(req, res) {
 
   return User.findById(userId).exec()
     .then(user => {
-      if(user.authenticate(oldPass)) {
+      if (user.authenticate(oldPass)) {
         user.password = newPass;
         return user.save()
           .then(() => {
@@ -109,7 +109,7 @@ export function me(req, res, next) {
 
   return User.findOne({ _id: userId }, '-salt -password -provider').exec()
     .then(user => { // don't ever give out the password or salt
-      if(!user) {
+      if (!user) {
         return res.status(401).end();
       }
       res.json(user);

@@ -25,7 +25,7 @@ export default function(app) {
   app.use(express.static(app.get('appPath')));
   app.use(morgan('dev'));
 
-  app.set('views', config.root + '/server/views');
+  app.set('views', `${config.root}/server/views`);
   app.set('view engine', 'pug');
   app.use(shrinkRay());
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,7 +47,7 @@ export default function(app) {
   }));
 
 
-  if(env === 'development' || env === 'test') {
+  if (env === 'development' || env === 'test') {
     app.use(errorHandler()); // Error handler - has to be last
   }
 }
