@@ -103,8 +103,8 @@
     "start": "./node_modules/babel-cli/bin/babel-node.js server",
     "lint": "./node_modules/.bin/eslint server",
     "fix": "./node_modules/.bin/eslint --fix server",
-    "precommit": "npm run lint",
-    "prepush": "npm run lint"
+    "precommit": "npm run lint && npm run test",
+    "prepush": "npm run lint && npm run test"
   },
   "private": true
 }
