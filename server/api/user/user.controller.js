@@ -44,7 +44,6 @@ export function create(req, res) {
         expiresIn: 60 * 30
       });
       let userObject = _.omit(user.toJSON(), ['salt', 'provider', 'password']);
-      console.log('userObject', userObject);
       res.json({ token, user: userObject });
     })
     .catch(validationError(res));
