@@ -34,9 +34,6 @@ export default function(app) {
   app.use(cookieParser());
   app.use(passport.initialize());
 
-
-
-
   // Persist sessions with MongoStore
   app.use(session({
     secret: config.secrets.session,
@@ -49,9 +46,9 @@ export default function(app) {
   }));
 
   // Add headers
-app.use(function (req, res, next) {
+  app.use(function(req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -61,7 +58,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     // Pass to next layer of middleware
     next();
-});
+  });
 
 
   if (env === 'development' || env === 'test') {
